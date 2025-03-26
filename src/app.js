@@ -1,15 +1,14 @@
 const express = require('express');
 const app = new express;
 
-
-app.use("/hello", (req, res) => {
-    res.send("hello all")
+app.get("/user/logout" ,(req,res)=>{
+    try {
+        res.send("logut")
+    } catch (error) {
+        
+    }
 })
 
-
-app.use("/test", (req, res) => {
-    res.send("test")
-})
 
 
 
