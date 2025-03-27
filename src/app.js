@@ -1,19 +1,41 @@
 const express = require('express');
-const app = new express;
+const { connectDb } = require('./config/database')
+const app =  express();
+const User = require('./models/user')
 
-app.get("/user/logout" ,(req,res)=>{
-    try {
-        res.send("logut")
-    } catch (error) {
-        
-    }
+
+app.post("/signup", async (req, res) => {
+
+
+    const user = new User({
+        firstName: "aditya",
+        lastName: "sharma",
+        emailId: "ggada",
+        password: "abcdasd"
+    })
+try {
+    
+   await user.save();
+   res.send("user added")
+} catch (error) {
+    res.status(400).send("error saving user" +error.message)
+}
+
 })
 
 
 
 
-app.listen(3000, () => {
 
-    console.log("running");
+connectDb().then(() => {
+    console.log("connected");
+    app.listen(3000, () => {
 
-});
+        console.log("running");
+
+    });
+})
+    .catch((err) => {
+        console.error("not cnnetec")
+    })
+
