@@ -48,6 +48,17 @@ app.get("/feed", async (req, res) => {
 
 })
 
+app.delete("/user", async (req,res)=>{
+    const userId=req.body.userId
+    console.log(userId);
+    
+    try {
+        const user=await User.findByIdAndDelete(userId)
+        res.send("user deleted successfully ")
+    } catch (error) {
+        res.status(404).send("user does not exist")
+    }
+})
 
 
 connectDb()
