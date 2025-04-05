@@ -38,7 +38,7 @@ userRouter.get("/user/connections", userAuth, async (req, res) => {
             ]
         }).populate("fromUserId", USER_SAFE_DATA).populate("toUserId", USER_SAFE_DATA)
         const data = connectionRequests.map((row) => {
-            if (row.fromUserId._id.toString() === loggedInUser._id.toString) {
+            if (row.fromUserId._id.toString() === loggedInUser._id.toString()) {
                 return row.toUserId
             }
             return row.fromUserId
