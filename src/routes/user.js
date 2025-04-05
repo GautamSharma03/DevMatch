@@ -38,17 +38,17 @@ userRouter.get("/user/connections", userAuth, async (req, res) => {
             ]
         }).populate("fromUserId", USER_SAFE_DATA).populate("toUserId", USER_SAFE_DATA)
         const data = connectionRequests.map((row) => {
-            if (row.fromUserId.toString() === loggedInUser._id.toString) {
+            if (row.fromUserId._id.toString() === loggedInUser._id.toString) {
                 return row.toUserId
             }
             return row.fromUserId
         })
         res.json({
-            data: data
+            data
         })
 
     } catch (error) {
-        res.status(404).send("Error: " + error.message)
+        res.status(400).send({ message: error.message });
     }
 
 
